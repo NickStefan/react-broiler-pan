@@ -1,5 +1,7 @@
 # React Flux Immutable (and Command Manager)
 
+Branches: master (uses JSX) no-jsx (no JSX)
+
 ## Building App For Development:
 
 ```
