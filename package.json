@@ -1,0 +1,33 @@
+{
+  "name": "react-broiler-pan",
+  "version": "0.0.0",
+  "description": "",
+  "main": "./dist/js/example.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NickStefan/react-broiler-pan.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NickStefan/react-broiler-pan/issues"
+  },
+  "homepage": "https://github.com/NickStefan/react-broiler-pan",
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-browserify": "^0.5.1",
+    "gulp-concat": "^2.4.3",
+    "gulp-memory-stats": "^1.0.0",
+    "gulp-rename": "^1.2.0",
+    "reactify": "^1.0.0"
+  },
+  "dependencies": {
+    "flux": "^2.0.1",
+    "immutable": "^3.6.2",
+    "lodash": "^3.0.0",
+    "react": "^0.12.2"
+  }
+}
