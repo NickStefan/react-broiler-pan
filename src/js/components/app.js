@@ -1,8 +1,9 @@
 var React = require('react/dist/react-with-addons.js');
 var AppStore = require('../stores/app-store');
 
-var MENU = require('./menu');
-var THING = require('./thing');
+var MENU = React.createFactory(require('./menu'));
+var THING = React.createFactory(require('./thing'));
+var _r = React.createElement;
 
 function getExample(){
   return AppStore.getExample();
@@ -33,10 +34,10 @@ var APP = React.createClass({
   },
   render: function(){
     return (
-      <div>
-        <MENU example={this.state.example} exampleState={this.state.exampleState} />
-        <THING thing={this.state.example.get('thing')} state={this.state.exampleState.get('thing')} />
-      </div>
+      _r('div', null,
+        MENU({example: this.state.example, exampleState:this.state.exampleState}),
+        THING({thing: this.state.example.get('thing'), state:this.state.exampleState.get('thing')})
+      )
     )
   }
 });

@@ -1,6 +1,7 @@
 var React = require('react/dist/react-with-addons.js');
 
 var AppActions = require('../actions/app-actions');
+var _r = React.createElement;
 
 var MENU = React.createClass({
   up: function(e){
@@ -27,12 +28,12 @@ var MENU = React.createClass({
 
   render: function(){
     return (
-      <div>
-        <button onClick={this.up}> Up </button>
-        <button onClick={this.down}> Down </button>
-        <button onClick={this.undo}> undo </button>
-        <button onClick={this.redo}> redo </button>
-      </div>
+      _r('div',null,
+        _r('button',{onClick: this.up},'Up'),
+        _r('button',{onClick: this.down},'Down'),
+        _r('button',{onClick: this.undo},'undo'),
+        _r('button',{onClick: this.redo},'redo')
+      )
     )
   }
 });

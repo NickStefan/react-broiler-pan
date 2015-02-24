@@ -7,13 +7,13 @@ gulp.task('browserify', function(){
 
   /* example init */
   gulp.src('src/js/example-init.js')
-  .pipe(browserify({transform: 'reactify', debug: true}))
+  .pipe(browserify({debug: true}))
   .pipe(concat('example-init.js'))
   .pipe(gulp.dest('dist/js'));
 
   /* example for require */
   gulp.src('src/js/example.js')
-  .pipe(browserify({transform: 'reactify', debug: false}))
+  .pipe(browserify({debug: false}))
   .pipe(concat('example.js'))
   .pipe(gulp.dest('dist/js'));
 

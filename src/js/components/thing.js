@@ -1,5 +1,6 @@
 var React = require('react/dist/react-with-addons.js');
 var classSet = React.addons.classSet;
+var _r = React.createElement;
 
 var AppActions = require('../actions/app-actions');
 
@@ -17,11 +18,9 @@ var THING = React.createClass({
     });
 
     return (
-      <div>
-        <h1 onClick={ this.colorIt } className={ classState }>
-          { this.props.thing.get('count') }
-        </h1>
-      </div>
+      _r('div',null,
+        _r('h1',{ onClick: this.colorIt, className: classState }, this.props.thing.get('count') )
+      )
     )
   }
 });

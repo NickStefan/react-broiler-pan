@@ -27085,7 +27085,6 @@ var AppActions = _.mapValues(ActionTypes, function(fnName){
 
 module.exports = AppActions;
 
-
 },{"../actions/command-manager":53,"../constants/app-constants":57,"../dispatchers/app-dispatcher":58,"lodash/lang/toArray":40,"lodash/object/extend":42,"lodash/object/has":43,"lodash/object/mapValues":46}],53:[function(require,module,exports){
 
 var LocalCommandManager = function(AppDispatcher, io){
@@ -27164,13 +27163,13 @@ var LocalCommandManager = function(AppDispatcher, io){
 
 module.exports = LocalCommandManager;
 
-
 },{}],54:[function(require,module,exports){
 var React = require('react/dist/react-with-addons.js');
 var AppStore = require('../stores/app-store');
 
-var MENU = require('./menu');
-var THING = require('./thing');
+var MENU = React.createFactory(require('./menu'));
+var THING = React.createFactory(require('./thing'));
+var _r = React.createElement;
 
 function getExample(){
   return AppStore.getExample();
@@ -27180,7 +27179,7 @@ function getExampleState(){
   return AppStore.getExampleState();
 }
 
-var APP = React.createClass({displayName: "APP",
+var APP = React.createClass({
   getInitialState: function(){
     return {
       example: getExample(),
@@ -27201,9 +27200,9 @@ var APP = React.createClass({displayName: "APP",
   },
   render: function(){
     return (
-      React.createElement("div", null, 
-        React.createElement(MENU, {example: this.state.example, exampleState: this.state.exampleState}), 
-        React.createElement(THING, {thing: this.state.example.get('thing'), state: this.state.exampleState.get('thing')})
+      _r('div', null,
+        _r(MENU, {example: this.state.example, exampleState:this.state.exampleState}),
+        _r(THING, {thing: this.state.example.get('thing'), state:this.state.exampleState.get('thing')})
       )
     )
   }
@@ -27211,13 +27210,13 @@ var APP = React.createClass({displayName: "APP",
 
 module.exports = APP;
 
-
 },{"../stores/app-store":60,"./menu":55,"./thing":56,"react/dist/react-with-addons.js":51}],55:[function(require,module,exports){
 var React = require('react/dist/react-with-addons.js');
 
 var AppActions = require('../actions/app-actions');
+var _r = React.createElement;
 
-var MENU = React.createClass({displayName: "MENU",
+var MENU = React.createClass({
   up: function(e){
     e.stopPropagation();
     e.preventDefault();
@@ -27242,11 +27241,11 @@ var MENU = React.createClass({displayName: "MENU",
 
   render: function(){
     return (
-      React.createElement("div", null, 
-        React.createElement("button", {onClick: this.up}, " Up "), 
-        React.createElement("button", {onClick: this.down}, " Down "), 
-        React.createElement("button", {onClick: this.undo}, " undo "), 
-        React.createElement("button", {onClick: this.redo}, " redo ")
+      _r('div',null,
+        _r('button',{onClick: this.up},'Up'),
+        _r('button',{onClick: this.down},'Down'),
+        _r('button',{onClick: this.undo},'undo'),
+        _r('button',{onClick: this.redo},'redo')
       )
     )
   }
@@ -27254,39 +27253,35 @@ var MENU = React.createClass({displayName: "MENU",
 
 module.exports = MENU;
 
-
 },{"../actions/app-actions":52,"react/dist/react-with-addons.js":51}],56:[function(require,module,exports){
 var React = require('react/dist/react-with-addons.js');
 var classSet = React.addons.classSet;
+var _r = React.createElement;
 
 var AppActions = require('../actions/app-actions');
 
-var THING = React.createClass({displayName: "THING",
+var THING = React.createClass({
   colorIt: function(e){
     e.stopPropagation();
     e.preventDefault();
-    var bool = this.props.state.get('onOff') ? true : false;
+    var bool = this.props.state.get('onOff') ? false : true;
     AppActions.otherAction(bool);
   },
 
   render: function(){
-    console.log(this.props.state.get('onOff'))
     var classState = classSet({
       'color': this.props.state.get('onOff')
     });
 
     return (
-      React.createElement("div", null, 
-        React.createElement("h1", {onClick:  this.colorIt, className: classState }, 
-           this.props.thing.get('count') 
-        )
+      _r('div',null,
+        _r('h1',{ onClick: this.colorIt, className: classState }, this.props.thing.get('count') )
       )
     )
   }
 });
 
 module.exports = THING;
-
 
 },{"../actions/app-actions":52,"react/dist/react-with-addons.js":51}],57:[function(require,module,exports){
 module.exports = {
@@ -27309,7 +27304,6 @@ module.exports = {
   }
 
 };
-
 },{}],58:[function(require,module,exports){
 var Dispatcher = require('flux').Dispatcher;
 var AppConstants = require('../constants/app-constants');
@@ -27331,13 +27325,11 @@ var AppDispatcher = _.mapValues(ActionTypes,function(fnName){
 
 module.exports = _.extend(new Dispatcher, AppDispatcher);
 
-
 },{"../constants/app-constants":57,"flux":1,"lodash/object/extend":42,"lodash/object/mapValues":46}],59:[function(require,module,exports){
 
 var EXAMPLE = require('./components/app');
 
 module.exports = EXAMPLE;
-
 },{"./components/app":54}],60:[function(require,module,exports){
 var EventEmitter = require('events').EventEmitter;
 var _ = {
@@ -27404,7 +27396,6 @@ AppStore.dispatchToken = AppDispatcher.register(function(payload){
 });
 
 module.exports = AppStore;
-
 },{"../constants/app-constants":57,"../dispatchers/app-dispatcher":58,"../stores/exampleDataStore":61,"../stores/exampleStateStore":62,"events":4,"lodash/object/extend":42}],61:[function(require,module,exports){
 var Immutable = require('immutable');
 var _ = {
@@ -27462,7 +27453,6 @@ module.exports = {
   storeMethods: storeMethods,
   data: data
 };
-
 },{"immutable":5,"lodash/object/mapValues":46}],62:[function(require,module,exports){
 var Immutable = require('immutable');
 var _ = {
@@ -27515,5 +27505,4 @@ module.exports = {
   stateMethods: stateMethods,
   state: state
 }
-
 },{"immutable":5,"lodash/object/mapValues":46}]},{},[59])
